@@ -5,7 +5,7 @@ export const Footer = () => {
     <footer className="bg-gradient-to-r from-yellow-200 to-pink-200 shadow-inner rounded-t-xl p-10">
     <div className="container mx-auto flex flex-wrap items-center justify-between">
       <div className="w-full sm:w-1/3 mb-6 sm:mb-0">
-        <Image src="/logo/logo.png" alt="Company Logo" width={100} height={100}/>
+        <Image src="/avif/logo.avif" alt="Company Logo" width={100} height={100}/>
         <p className="text-green-800 font-serif font-medium pt-4">
           Transforming ideas into digital solutions with innovative technologies and creative strategies.
         </p>
