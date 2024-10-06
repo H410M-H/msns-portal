@@ -12,12 +12,15 @@ export default function AdminDashboard() {
             Admin Dashboard
           </span>
         </h1>
-        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-600 to-yellow-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-600 to-yellow-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left">
+        </div>
       </div>
-      <Separator className="bg-green-900" />
-      <MainMenu />
+        <Separator className="bg-green-900 my-4" />
+        <div className="flex-cols-4 gap-6 lg:gap-8 justify-center items-center">
+        <MainMenu />
       <AdminCards />
+      </div>
+        <Separator className="bg-green-900 my-4" />
     </main>
-
-  )
+  );
 }

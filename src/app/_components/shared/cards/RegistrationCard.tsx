@@ -1,4 +1,4 @@
-import { GraduationCap, UserPlusIcon } from "lucide-react";
+import { UserPlusIcon } from "lucide-react";
 import Link from "next/link";
 
 export const RegistrationCards = () => {
@@ -8,14 +8,7 @@ export const RegistrationCards = () => {
       description:
         "Easily enroll new students and manage their financial records.",
       icon: <UserPlusIcon className="w-12 h-12 mb-4 text-green-500" />,
-      href: "/registration/student/create",
-    },
-    {
-      title: "Active Students",
-      description:
-        "Easily enroll new students and manage their financial records.",
-      icon: <UserPlusIcon className="w-12 h-12 mb-4 text-green-500" />,
-      href: "/registration/student/view",
+      href: "/admin/registration/student/create",
     },
     {
     title: "Employee Registration",
@@ -23,13 +16,6 @@ export const RegistrationCards = () => {
       "Easily enroll new Employees and manage their financial records.",
     icon: <UserPlusIcon className="w-12 h-12 mb-4 text-green-500" />,
     href: "/registration/faculty/create",
-  },
-  {
-    title: "Active Employees",
-    description:
-      "Easily enroll new Employees and manage their financial records.",
-    icon: <GraduationCap className="w-12 h-12 mb-4 text-green-500" />,
-    href: "/registration/faculty/view",
   },
   ];
 

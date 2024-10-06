@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Button } from "~/components/ui/button";
-import { ChevronDown, Search, User, Menu } from "lucide-react";
+import { ChevronDown, Search, User } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import {
   DropdownMenu,
@@ -41,11 +41,11 @@ const menuItems = [
     ],
   },
   {
-    name: "Company",
+    name: "Revenue",
     options: [
-      { label: "About Us", href: "/about" },
-      { label: "Careers", href: "/about" },
-      { label: "Press", href: "/about" },
+      { label: "Fee Management", href: "/revenue/fee" },
+      { label: "Salary", href: "/revenue/salary" },
+      { label: "Finance", href: "/revenue/finance" },
       { label: "Contact", href: "/about" },
     ],
   },
@@ -53,7 +53,6 @@ const menuItems = [
 
 export default function MainMenu() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const menuRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   const handleMenuClick = (menuName: string) => {
@@ -75,128 +74,103 @@ export default function MainMenu() {
   }, []);
 
   return (
-    <nav className="z-10 flex items-center justify-between p-4 bg-gradient-to-r from-emerald-400 via-yellow-300 to-green-900 shadow-lg">
-      {/* Left section: Logo and menu */}
+    <nav className="flex items-center justify-between p-4 bg-gradient-to-r from-emerald-300 via-yellow-200 to-green-800 shadow-md">
       <div className="flex items-center space-x-4">
-        <Link href="/admin/dashboard" className="text-green-900 text-lg font-bold">
-          Dashboard
-        </Link>
+        <Button
+          variant="ghost"
+          className="hover:bg-white/60 focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition-all duration-300 ease-in-out"
+        >
+          <Link href="/admin/dashboard">Dashboard</Link>
+        </Button>
 
-        <div className="hidden lg:flex space-x-4">
-          {menuItems.map((item, index) => (
-            <div
-              key={item.name}
-              className="relative"
-              ref={(el) => {
-                menuRefs.current[index] = el;
-              }}
+        {menuItems.map((item, index) => (
+          <div
+            key={item.name}
+            className="relative"
+            ref={(el) => {
+              menuRefs.current[index] = el;
+            }}
+          >
+            <Button
+              variant="ghost"
+              className="flex items-center hover:bg-green-400/60 focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition-all duration-300 ease-in-out"
+              onMouseOver={() => handleMenuClick(item.name)}
+              aria-expanded={openDropdown === item.name}
+              aria-haspopup="menu"
+              aria-controls={`dropdown-${item.name}`}
             >
-              <Button
-                variant="ghost"
-                className="flex items-center text-green-900 hover:bg-white/10"
-                onClick={() => handleMenuClick(item.name)}
-                aria-expanded={openDropdown === item.name}
-                aria-haspopup="menu"
-              >
-                {item.name}{" "}
-                <ChevronDown
-                  className={`ml-1 h-4 w-4 transition-transform ${
-                    openDropdown === item.name ? "rotate-180" : "rotate-0"
-                  }`}
-                />
-              </Button>
+              {item.name}{" "}
+              <ChevronDown
+                className={`ml-1 h-4 w-4 transition-transform duration-300 ease-in-out ${
+                  openDropdown === item.name ? "rotate-180" : "rotate-0"
+                }`}
+              />
+            </Button>
 
-              {openDropdown === item.name && (
+            {openDropdown === item.name && (
+              <div
+                id={`dropdown-${item.name}`}
+                className="absolute z-50 left-0 mt-2 w-65 rounded-md shadow-lg bg-green-100 opacity-90 ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out transform"
+              >
                 <div
-                  className="absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                  className="py-1"
                   role="menu"
                   aria-orientation="vertical"
+                  aria-labelledby="options-menu"
                 >
                   {item.options.map((option) => (
                     <Link
                       key={option.label}
                       href={option.href}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-100"
+                      className="block px-4 py-2 text-base font-medium text-green-900 hover:bg-purple-100 focus:bg-purple-200 transition-all duration-300 ease-in-out"
                       role="menuitem"
-                      onClick={() => setOpenDropdown(null)} // Close dropdown on selection
+                      onClick={() => setOpenDropdown(null)}
                     >
                       {option.label}
                     </Link>
                   ))}
                 </div>
-              )}
-            </div>
-          ))}
-        </div>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
 
-      {/* Right section: Search and user */}
       <div className="flex items-center space-x-4">
-        {/* Search */}
-        <div className="relative hidden md:block">
-          <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-green-900" />
+        <div className="relative">
+          <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white" />
           <Input
-            className="pl-8 text-gray-900 placeholder-gray-400 bg-white rounded-full shadow-md focus:ring-2 focus:ring-purple-300 focus:outline-none"
+            className="pl-8 text-green-900 placeholder-gray-400 bg-white rounded-full shadow-md focus:ring-2 focus:ring-purple-300 focus:outline-none transition-all duration-300 ease-in-out"
             placeholder="Search..."
           />
         </div>
 
-        {/* User dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               size="icon"
-              className="hover:bg-white/20 text-green-900"
+              className="hover:bg-white/20 focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition-all duration-300 ease-in-out"
             >
-              <User className="h-5 w-5" />
+              <User className="h-5 w-5 text-white" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
-            className="rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+            className="rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-transform duration-300 ease-in-out"
           >
-            <DropdownMenuItem className="hover:bg-purple-100">
+            <DropdownMenuItem className="hover:bg-purple-100 focus:bg-purple-200">
               <Link href="/profile">Profile</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-purple-100">
+            <DropdownMenuItem className="hover:bg-purple-100 focus:bg-purple-200">
               <Link href="/settings">Settings</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-purple-100">
+            <DropdownMenuItem className="hover:bg-purple-100 focus:bg-purple-200">
               <Link href="/logout">Logout</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-
-        {/* Mobile hamburger menu */}
-        <Button
-          variant="ghost"
-          className="lg:hidden text-green-900 hover:bg-white/20"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          <Menu className="h-6 w-6" />
-        </Button>
       </div>
-
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg p-4">
-          {menuItems.map((item) => (
-            <div key={item.name}>
-              <p className="text-lg font-semibold text-gray-900">{item.name}</p>
-              {item.options.map((option) => (
-                <Link
-                  key={option.label}
-                  href={option.href}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  {option.label}
-                </Link>
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
     </nav>
   );
 }

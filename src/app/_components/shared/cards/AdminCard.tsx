@@ -48,7 +48,7 @@ import {
         <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-700 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl opacity-80 transition-transform duration-700 ease-in-out group-hover:rotate-0 group-hover:skew-y-0 group-hover:scale-105"></div>
 
         {/* Card Content */}
-        <div className="relative z-10 px-6 py-8 bg-white/90 backdrop-blur-lg shadow-xl rounded-3xl transition-transform duration-500 ease-in-out group-hover:scale-105 group-hover:rotate-1">
+        <div className="relative z-10 px-6 py-8 bg-yellow-100 backdrop-blur-lg shadow-xl rounded-3xl transition-transform duration-500 ease-in-out group-hover:scale-105 group-hover:rotate-1">
           <div className="flex flex-col items-center text-center">
             {service.icon}
             <h3 className="text-xl font-semibold text-gray-900 group-hover:text-green-700 transition-colors duration-300">

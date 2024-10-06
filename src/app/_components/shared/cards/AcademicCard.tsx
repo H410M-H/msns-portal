@@ -1,4 +1,4 @@
-  import { CircleFadingPlusIcon, FileStackIcon, FileTextIcon, PlusCircleIcon } from "lucide-react";
+  import { PlusCircleIcon } from "lucide-react";
   import Link from "next/link";
   
   export const AcademicCards = () => {
@@ -8,45 +8,51 @@
         description:
           "Easily enroll new students and manage their financial records.",
         icon: <PlusCircleIcon className="mb-4 h-12 w-12 text-blue-500" />,
-        href: "/registration/portal",
+        href: "/admin/registration/portal",
       },
       {
-        title: "Time Table/ Datesheet",
+        title: "Active Employee",
         description:
           "Easily enroll new students and manage their financial records.",
-        icon: <FileStackIcon className="mb-4 h-12 w-12 text-blue-500" />,
-        href: "",
+        icon: <PlusCircleIcon className="mb-4 h-12 w-12 text-blue-500" />,
+        href: "/admin/registration/faculty/view",
       },
       {
-        title: "Exams & Results",
-        description: "Create and manage new classes or courses for the school.",
-        icon: <FileTextIcon className="mb-4 h-12 w-12 text-indigo-500" />,
-        href: "",
-      },
-      {
-        title: "Events & Activities",
-        description: "Customize payment plans and automate recurring payments.",
-        icon: <CircleFadingPlusIcon className="mb-4 h-12 w-12 text-red-500" />,
-        href: "",
+        title: "Active Students",
+        description:
+          "Easily enroll new students and manage their financial records.",
+        icon: <PlusCircleIcon className="mb-4 h-12 w-12 text-blue-500" />,
+        href: "/admin/registration/student/view",
       },
     ];
   
     return (
-      <section className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
-        {services.map((service, index) => (
-          <Link
-            href={service.href}
-            key={index}
-            className="transform rounded-lg bg-yellow-100 p-6 shadow-md transition duration-300 ease-in-out hover:scale-105 hover:cursor-pointer"
-          >
+      <div className="relative grid grid-col gap-10 pt-12 sm:grid-cols-3 max-w-6xl animate-slide-in-up">
+      {services.map((service, index) => (
+        <Link
+          href={service.href}
+          key={index}
+          className="relative group gap-10 p-2 transform transition-all duration-500 ease-in-out hover:scale-105 hover:z-10"
+          style={{ transitionDelay: `${index * 100}ms` }}
+        >
+          {/* Background Card Decoration */}
+          <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-700 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl opacity-80 transition-transform duration-700 ease-in-out group-hover:rotate-0 group-hover:skew-y-0 group-hover:scale-105"></div>
+  
+          {/* Card Content */}
+          <div className="relative z-10 px-6 py-8 bg-yellow-100 backdrop-blur-lg shadow-xl rounded-3xl transition-transform duration-500 ease-in-out group-hover:scale-105 group-hover:rotate-1">
             <div className="flex flex-col items-center text-center">
               {service.icon}
-              <h3 className="mb-2 text-xl font-semibold">{service.title}</h3>
-              <p className="text-gray-600">{service.description}</p>
+              <h3 className="text-xl font-semibold text-gray-900 group-hover:text-green-700 transition-colors duration-300">
+                {service.title}
+              </h3>
+              <p className="mt-2 text-gray-700 group-hover:text-green-600 transition-colors duration-300">
+                {service.description}
+              </p>
             </div>
-          </Link>
-        ))}
-      </section>
+          </div>
+        </Link>
+      ))}
+    </div>
     );
   };
   
